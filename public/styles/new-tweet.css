@@ -1,0 +1,48 @@
+.new-tweet{
+  margin: 0 auto;
+  background: #E0DAD9;
+  margin-left: 2em;
+  margin-right: 2em;
+  border-radius: 5px;
+}
+
+.new-tweet h2 {
+  padding-top: 8px;
+  text-align: left;
+  padding-left: 5%;
+}
+
+
+.new-tweet h2:after {
+    /*margin-left: 5%;*/
+    margin-right: 5%;
+    content:' ';
+    display:block;
+    border:1px solid black;
+}
+
+.new-tweet form {
+  /*margin: 2px;*/
+  /*padding-left: 2px;*/
+  /*padding-right: 2px;*/
+}
+
+.new-tweet textarea {
+  text-align: left;
+  left: 0;
+  right: 0;
+  width: 90%;
+  padding: 5px;
+}
+
+.new-tweet input {
+  float: left;
+  margin-left: 5%;
+  margin-bottom: 3%;
+}
+
+.new-tweet .counter {
+  float: right;
+  margin-right: 5%;
+  margin-bottom: 3%;
+}
