@@ -26,4 +26,30 @@
   width: 80px;
 }
 
+#nav-bar .compose {
+  background: #e8fdff;
+  border-radius: 3px;
+  margin: 10px;
+  float: right;
+  border: black solid 1px;
+}
 
+#nav-bar .compose:hover {
+  background: white;
+}
+
+#nav-bar .compose .logo{
+  float: left;
+  height: 20px;
+  width: 20px;
+}
+
+#nav-bar .compose p {
+  float: left;
+  color: #1ba28d;
+  margin: 19px;
+}
+
+#nav-bar .compose:hover p {
+  color: black;
+}

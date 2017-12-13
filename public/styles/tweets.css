@@ -1,0 +1,90 @@
+.tweet {
+  background: white;
+  border-radius: 5px;
+  font-family: 'Roboto Condensed', sans-serif;
+  border: black solid 1px;
+  z-index: 2;
+}
+
+.tweet header {
+  opacity: 0.7;
+}
+
+.tweet:hover header {
+  opacity: 1;
+}
+/*
+.tweet .header:hover {
+  background: red;
+}*/
+
+
+.tweet header {
+  border-radius: 5px 5px 0 0;
+  height: 60px;
+  background: #f7f7f7;
+  left: 0;
+  right: 0;
+  top: 0;
+}
+
+.tweet .avatar {
+  float: left;
+  height: 45px;
+  width: 45px;
+  margin-left: 8px;
+  margin-top: 2%;
+  margin-bottom: 1%;
+  border-radius: 5px;
+}
+
+.tweet .name {
+  float: left;
+  color: #798792;
+  font-size: large;
+  font-weight: bold;
+  margin-top: 1.8%;
+  margin-left: 1.6%
+}
+
+.tweet .handle {
+  float: right;
+  color: #798792;
+  font-size: smaller;
+  margin-right: 2.3%;
+}
+
+.tweet .the-Tweet{
+  font-size: 12;
+  text-align: left;
+  margin-left: 4%;
+  margin-right: 4%;
+  margin-top: 8%;
+}
+
+
+.tweet .footer {
+  font-size: 12;
+  text-align: left;
+  padding: 2%;
+  font-size: small;
+  border-top: 1px solid grey;
+  margin-top: 3%;
+}
+
+.tweet .footer-icon {
+  visibility: hidden;
+  /*opacity: 0.2;*/
+  float: right;
+  height: 10px;
+  width: 10px;
+}
+
+.tweet:hover .footer-icon {
+  visibility: visible;
+  /*opacity: 1;*/
+  float: right;
+  height: 10px;
+  width: 10px;
+}
+

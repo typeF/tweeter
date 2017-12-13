@@ -14,12 +14,14 @@
     <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
     <link rel="stylesheet" href="/styles/nav.css" type="text/css" />
     <link rel="stylesheet" href="/styles/new-tweet.css" type="text/css" />
+     <link rel="stylesheet" href="/styles/tweets.css" type="text/css" />
 
     <!-- External JS -->
     <script type="text/javascript" src="/vendor/jquery-2.2.3.min.js"></script>
 
     <!-- App JS -->
     <script type="text/javascript" src="/scripts/app.js"></script>
+    <script type="text/javascript" src="/scripts/composer-char-counter.js"></script>
   </head>
 
   <body>
@@ -28,6 +30,10 @@
     <nav id="nav-bar">
       <img class="logo" src="/images/bird.png">
       <span class="header">Tweeter</span>
+      <div class="compose">
+        <!-- <img class="logo" src="/images/bird.png"> -->
+        <p> Compose </p>
+      </div>
     </nav>
 
     <!-- Page-specific (main) content here -->
@@ -35,25 +41,39 @@
 
       <section class="new-tweet">
         <h2>Compose Tweet</h2>
-        <form action="/tweets" method="POST">
+
+        <form class="tweet-submit-form" action="/tweets" method="POST">
           <div class="textarea-container">
             <textarea name="text" placeholder="What are you humming about?"></textarea>
-<!--           </div>
-          <div class="tweet-button"> -->
-            <input type="submit" value="Tweet">
+          </div>
+          <div class="tweet-button">
+            <input  type="submit" value="Tweet">
             <span class="counter">140</span>
             <div style="clear: both;"></div>
           </div>
         </form>
       </section>
 
+        <div id="tweets">
+          <article class="tweet">
+
+            <header class="header">
+              <img class="avatar" src="https://vanillicon.com/788e533873e80d2002fa14e1412b4188_200.png">
+              <P class="name">John Doe </p>
+              <p class="handle">@JohnDoe</p>
+            </header>
+
+            <p class="the-Tweet">Fake Article. Fake News. Fake Tweet.</p>
+
+            <footer class="footer">10 Days ago
+              <img class="footer-icon" src="https://vanillicon.com/788e533873e80d2002fa14e1412b4188_200.png">
+            </footer>
+
+          </article>
+          <!-- <div style="clear: both;"></div> -->
+        </div>
+
       <p>Placeholder 1 </p>
-      <p>Placeholder 2 </p>
-      <p>Placeholder 2 </p>
-      <p>Placeholder 2 </p>
-      <p>Placeholder 2 </p>
-      <p>Placeholder 2 </p>
-      <p>Placeholder 2 </p>
       <p>Placeholder 2 </p>
       <p>Placeholder 2 </p>
 
