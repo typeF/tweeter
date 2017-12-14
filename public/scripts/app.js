@@ -27,7 +27,6 @@ function createTweetElement (data) {
       var $handle = $("<p>").addClass("handle").text(data.user.handle);
       $header.append($img, $name, $handle);
 
-
     var $tweet = $("<p>").text(data.content.text).addClass("the-Tweet");
 
     var $footer = $("<footer>").addClass("footer");
@@ -53,9 +52,6 @@ $(document).ready(function (){
   let $tweetForm = $(".tweet-submit-form");
 
   $tweetForm.on('submit', function (event){
-    // console.log(this.val());
-    // console.log(event);
-    // console.log($(this));
     event.preventDefault();
     if (!errorHandling()){
       return
@@ -70,27 +66,34 @@ $(document).ready(function (){
 
   $(".compose").on('click', composeSlider);
 
-
 });
 
-  function getTweets () {
+function getTweets () {
+    $.ajax({
+      url: "/tweets",
+      method: "GET",
+      data: $(this).serialize()
+    }).done(function(tweets){
+        console.log("AJAX Completed");
+        $("textarea").val("");
+        $(".counter").text("140");
+        renderTweets(tweets);
+    });
+}
+
+function composeSlider(){
+  // $(".new-tweet").slideToggle();
+  // $('textarea').focus();
+  //alt ajax testing
       $.ajax({
-        url: "/tweets",
-        method: "GET",
-        data: $(this).serialize()
-      }).done(function(tweets){
-          console.log("AJAX Completed");
-          renderTweets(tweets);
-      });
-  }
-
-  function composeSlider(){
-    $(".new-tweet").slideToggle();
-    $('textarea').focus();
-    // console.log("SLIDE UP");
-   }
-
-
+      url: "registration.html",
+      method: "GET",
+    }).done(function(registrationHTML){
+        console.log(registrationHTML);
+        $('main').empty();
+        $('main').append(registrationHTML);
+    });
+ }
 
 function errorHandling (){
   const textarea = $("textarea").val();
@@ -106,7 +109,6 @@ function errorHandling (){
     return true
   }
 }
-
 
 var data2 = [
   {

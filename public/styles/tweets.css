@@ -2,8 +2,14 @@
   background: white;
   border-radius: 5px;
   font-family: 'Roboto Condensed', sans-serif;
-  border: black solid 1px;
-  z-index: 2;
+  margin-left: 2em;
+  margin-right: 2em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  border: #d3d3d3 solid 1px;
+  position: relative;
+  top: 2em;
+  bottom: 2em;
 }
 
 .tweet header {
@@ -22,7 +28,7 @@
 .tweet header {
   border-radius: 5px 5px 0 0;
   height: 60px;
-  background: #f7f7f7;
+  background: #f3f3f3;
   left: 0;
   right: 0;
   top: 0;
@@ -40,7 +46,7 @@
 
 .tweet .name {
   float: left;
-  color: #798792;
+  color: #637c82;
   font-size: large;
   font-weight: bold;
   margin-top: 1.8%;
@@ -49,7 +55,7 @@
 
 .tweet .handle {
   float: right;
-  color: #798792;
+  color: #aeafae;
   font-size: smaller;
   margin-right: 2.3%;
 }
@@ -60,6 +66,8 @@
   margin-left: 4%;
   margin-right: 4%;
   margin-top: 8%;
+  margin-bottom: 8%;
+  color: #39565e;
 }
 
 
@@ -68,13 +76,12 @@
   text-align: left;
   padding: 2%;
   font-size: small;
-  border-top: 1px solid grey;
+  border-top: 1px solid #f1f1f1;
   margin-top: 3%;
 }
 
 .tweet .footer-icon {
   visibility: hidden;
-  /*opacity: 0.2;*/
   float: right;
   height: 10px;
   width: 10px;
@@ -82,7 +89,6 @@
 
 .tweet:hover .footer-icon {
   visibility: visible;
-  /*opacity: 1;*/
   float: right;
   height: 10px;
   width: 10px;

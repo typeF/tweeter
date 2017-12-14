@@ -1,24 +1,28 @@
 .new-tweet{
   margin: 0 auto;
-  background: #E0DAD9;
+  background: #eeeeee;
   margin-left: 2em;
   margin-right: 2em;
   border-radius: 5px;
+  margin-top: 3em;
+  border: #d3d3d3 solid 1px;
+  position: relative;
+  top: 2em;
 }
 
 .new-tweet h2 {
-  padding-top: 8px;
   text-align: left;
   padding-left: 5%;
+  color: #234751;
 }
 
 
 .new-tweet h2:after {
-    /*margin-left: 5%;*/
-    margin-right: 5%;
-    content:' ';
-    display:block;
-    border:1px solid black;
+  /*margin-left: 5%;*/
+  margin-right: 5%;
+  content:' ';
+  display:block;
+  border:1px solid black;
 }
 
 .new-tweet form {
@@ -31,18 +35,20 @@
   text-align: left;
   left: 0;
   right: 0;
-  width: 90%;
+  width: 95%;
   padding: 5px;
 }
 
 .new-tweet input {
   float: left;
-  margin-left: 5%;
+  margin-left: 2.5%;
   margin-bottom: 3%;
 }
 
 .new-tweet .counter {
   float: right;
-  margin-right: 5%;
+  margin-right: 2.5%;
   margin-bottom: 3%;
+  color: #34545e;
+  font-style: italic;
 }

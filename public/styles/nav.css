@@ -18,6 +18,7 @@
   font-size: 2em;
   line-height: 2.4;
   padding-left: 10px;
+  color: #e8fdff;
 }
 
 #nav-bar .logo {
@@ -28,26 +29,32 @@
 
 #nav-bar .compose {
   background: #e8fdff;
-  border-radius: 3px;
+  border-radius: 7px;
   margin: 10px;
   float: right;
   border: black solid 1px;
 }
 
+#nav-bar .compose-icon {
+  height: 20px;
+  width: 20px;
+  color: #1ba28d;
+  position: relative;
+  top: 3px;
+}
+
+
 #nav-bar .compose:hover {
   background: white;
 }
 
-#nav-bar .compose .logo{
-  float: left;
-  height: 20px;
-  width: 20px;
-}
 
 #nav-bar .compose p {
   float: left;
   color: #1ba28d;
-  margin: 19px;
+  margin: 15px;
+  font-size: x-large;
+
 }
 
 #nav-bar .compose:hover p {
