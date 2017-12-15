@@ -4,10 +4,7 @@
   margin-left: 2em;
   margin-right: 2em;
   border-radius: 5px;
-  margin-top: 3em;
   border: #d3d3d3 solid 1px;
-  position: relative;
-  top: 2em;
 }
 
 .new-tweet h2 {
@@ -26,9 +23,9 @@
 }
 
 .new-tweet form {
-  /*margin: 2px;*/
-  /*padding-left: 2px;*/
-  /*padding-right: 2px;*/
+  margin: 2px;
+  padding-left: 2px;
+  padding-right: 2px;
 }
 
 .new-tweet textarea {

@@ -60,3 +60,63 @@
 #nav-bar .compose:hover p {
   color: black;
 }
+
+
+#nav-bar .register {
+  background: #e8fdff;
+  border-radius: 7px;
+  margin: 10px;
+  float: right;
+  border: black solid 1px;
+}
+
+#nav-bar .register-icon {
+  height: 20px;
+  width: 20px;
+  color: #1ba28d;
+  position: relative;
+  top: 3px;
+}
+
+
+#nav-bar .register:hover {
+  background: white;
+}
+
+
+#nav-bar .register p {
+  float: left;
+  color: #1ba28d;
+  margin: 15px;
+  font-size: x-large;
+
+}
+
+#nav-bar .register:hover p {
+  color: black;
+}
+
+#nav-bar .login {
+  background: #e8fdff;
+  border-radius: 7px;
+  margin: 10px;
+  float: right;
+  border: black solid 1px;
+}
+
+#nav-bar .login:hover {
+  background: white;
+}
+
+
+#nav-bar .login p {
+  float: left;
+  color: #1ba28d;
+  margin: 15px;
+  font-size: x-large;
+
+}
+
+#nav-bar .login:hover p {
+  color: black;
+}
