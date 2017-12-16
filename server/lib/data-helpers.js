@@ -41,6 +41,21 @@ module.exports = function makeDataHelpers(db) {
 
     },
 
+    loginStatus: function(query,callback){
+      console.log(query);
+      if (query === undefined){
+        return callback (null, false);
+      }
+      db.collection("users").findOne({"user.userID":query}, function(err, result){
+        console.log(result);
+        if (query === result.user.userID){
+          callback(null, true);
+        } else {
+          callback(null, false);
+        }
+      });
+    },
+
 
     generateRandomID: function(){
       return Math.random().toString(16).slice(9);
@@ -48,7 +63,6 @@ module.exports = function makeDataHelpers(db) {
 
     checkLogin: function(loginInfo, callback) {
       db.collection("users").find().toArray((err, users) => {
-        // console.log(users);
         if (err) {
           return callback(err);
         }

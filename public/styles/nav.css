@@ -120,3 +120,28 @@
 #nav-bar .login:hover p {
   color: black;
 }
+
+#nav-bar .logout {
+  background: #e8fdff;
+  border-radius: 7px;
+  margin: 10px;
+  float: right;
+  border: black solid 1px;
+}
+
+#nav-bar .logout:hover {
+  background: white;
+}
+
+
+#nav-bar .logout p {
+  float: left;
+  color: #1ba28d;
+  margin: 15px;
+  font-size: x-large;
+
+}
+
+#nav-bar .logout:hover p {
+  color: black;
+}

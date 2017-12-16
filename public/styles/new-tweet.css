@@ -28,6 +28,10 @@
   padding-right: 2px;
 }
 
+.new-tweet .textarea-container{
+  margin-left: 10px;
+}
+
 .new-tweet textarea {
   text-align: left;
   left: 0;
@@ -44,7 +48,7 @@
 
 .new-tweet .counter {
   float: right;
-  margin-right: 2.5%;
+  margin-right: 5%;
   margin-bottom: 3%;
   color: #34545e;
   font-style: italic;

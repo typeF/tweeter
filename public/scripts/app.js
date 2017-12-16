@@ -13,12 +13,17 @@ function createTweetElement (data) {
       var $imgf = $("<img src='https://png.icons8.com/destination/androidL/30/000000'>").addClass("footer-icon");
       var $imgrt = $("<img src='https://png.icons8.com/refresh/p1em/30/000000'>").addClass("footer-icon");
       var $imghrt = $("<img src='https://png.icons8.com/heart-outline/android/30/000000'>").addClass("footer-icon heart").data("likes",data._id);
-      var $likes = $("<p>").addClass("likes").text(data.likeCount);
-      $footer.append($date, $likes, $imgf, $imgrt, $imghrt);
+      var $likes = $("<span>").addClass("likes").text(data.likeCount);
+
+      var $div = $("<div>").append($likes, $imgf, $imgrt, $imghrt).addClass("tweet-actions");
+
+    $footer.append($date, $div);
 
   $tweetings.append($header, $tweet, $footer);
   return $tweetings
 }
+
+console.log("HI");
 
 function renderTweets(data){
   $("#tweets").empty();
@@ -28,8 +33,6 @@ function renderTweets(data){
 
   return
 }
-
-// renderTweets(data2);
 
 $(document).ready(function (){
   let $tweetForm = $(".tweet-submit-form");
@@ -59,12 +62,32 @@ $(document).ready(function (){
       }).done(getTweets);
   });
 
+  $("#nav-bar").on('click', ".logout", function(event){
+    console.log("clicked logout");
+    $.ajax({
+      url: "/tweets/logout",
+      method: "POST",
+    }).done(function(){
+        $('.logout').hide();
+        $('.new-tweet').hide();
+        $('.compose').hide();
+        $('.login').show();
+        $('.register').show();
+    });
+  });
+
   $("body").on('click', ".login", loginAjax);
   $("body").on('click', ".register", registrationAjax);
 
-
   getTweets();
+  $('.logout').hide();
+  $('.new-tweet').hide();
+  $('.compose').hide();
+
+  checkIsLoggedIn();
+
 });
+
 
 function getTweets () {
     $.ajax({
@@ -104,6 +127,19 @@ function registrationAjax(){
   });
 }
 
+function checkIsLoggedIn(){
+  $.ajax({
+    url: '/isLoggedIn',
+    method: 'GET'
+  }).done(function(isLoggedIn){
+    if(isLoggedIn) {
+      $('.compose').show();
+      $('.logout').show();
+      $('.login').hide();
+      $('.register').hide();
+    }
+  });
+}
 
 function errorHandling (){
   const textarea = $("textarea").val();

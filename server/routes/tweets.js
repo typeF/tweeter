@@ -5,7 +5,10 @@ const cookieSession = require('cookie-session');
 const bcrypt = require('bcrypt');
 const bodyParser = require('body-parser');
 const express       = require('express');
+const app = express();
 const tweetsRoutes  = express.Router();
+
+
 
 module.exports = function(DataHelpers) {
 
@@ -20,13 +23,11 @@ module.exports = function(DataHelpers) {
     req.session.userID = userID;
 
     const user = {
-        user: {
-          userID: userID,
-          username: username,
-          name: name,
-          email: email,
-          password: passwordHashed
-      }
+      userID: userID,
+      username: username,
+      name: name,
+      email: email,
+      password: passwordHashed
     }
 
     DataHelpers.saveUser(user);
@@ -46,6 +47,17 @@ module.exports = function(DataHelpers) {
     }); //, function (err){
 
   });
+
+  tweetsRoutes.post("/loginStatus", function (req, res){
+    DataHelpers.loginStatus(req.session.userID, function(err, result){
+      if (err) {
+        res.status(500).json({ error: err.message });
+      } else {
+        console.log("result is: " + result);
+        return (result);
+      }
+    });
+});
 
   // Login route
   tweetsRoutes.post("/login", function (req, res){
@@ -76,6 +88,7 @@ module.exports = function(DataHelpers) {
 
   // Get tweets route
   tweetsRoutes.get("/", function(req, res) {
+
     DataHelpers.getTweets((err, tweets) => {
       if (err) {
         res.status(500).json({ error: err.message });
@@ -83,6 +96,7 @@ module.exports = function(DataHelpers) {
         res.json(tweets);
       }
     });
+
   });
 
   // Save tweet route
@@ -110,6 +124,18 @@ module.exports = function(DataHelpers) {
       }
     });
   });
+
+  tweetsRoutes.post("/logout", function(req, res) {
+    console.log("Logged out");
+    req.session = null;
+      DataHelpers.getTweets((err, tweets) => {
+          if (err) {
+            res.status(500).json({ error: err.message });
+         } else {
+            res.json(tweets);
+         }
+        });
+      });
 
   return tweetsRoutes;
 
