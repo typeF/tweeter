@@ -1,6 +1,5 @@
 $(document).ready(function (){
   $(".new-tweet").on('input', 'textarea', function(event) {
-    // console.log($(this).val());
     const counter = 140 - $(this).val().length;
     let counterButton = $(this).parent().parent().find('.counter');
     counterButton.text(counter);
@@ -9,6 +8,5 @@ $(document).ready(function (){
     } else {
       counterButton.css({'color':'black'});
     }
-    // console.log(counter);
   });
 });

@@ -1,15 +1,15 @@
 .tweet {
   background: white;
   border-radius: 5px;
+  border: #d3d3d3 solid 1px;
+  bottom: 2em;
   font-family: 'Roboto Condensed', sans-serif;
+  margin-bottom: 1em;
   margin-left: 2em;
   margin-right: 2em;
   margin-top: 1em;
-  margin-bottom: 1em;
-  border: #d3d3d3 solid 1px;
   position: relative;
   top: 2em;
-  bottom: 2em;
 }
 
 .tweet header {
@@ -19,77 +19,71 @@
 .tweet:hover header {
   opacity: 1;
 }
-/*
-.tweet .header:hover {
-  background: red;
-}*/
-
 
 .tweet header {
+  background: #f3f3f3;
   border-radius: 5px 5px 0 0;
   height: 60px;
-  background: #f3f3f3;
   left: 0;
   right: 0;
   top: 0;
 }
 
 .tweet .avatar {
+  border-radius: 5px;
   float: left;
   height: 45px;
-  width: 45px;
+  margin-bottom: 1%;
   margin-left: 8px;
   margin-top: 2%;
-  margin-bottom: 1%;
-  border-radius: 5px;
+  width: 45px;
 }
 
 .tweet .name {
-  float: left;
   color: #637c82;
+  float: left;
   font-size: large;
   font-weight: bold;
+  margin-left: 1.6%;
   margin-top: 1.8%;
-  margin-left: 1.6%
 }
 
 .tweet .handle {
-  float: right;
   color: #aeafae;
+  float: right;
   font-size: smaller;
   margin-right: 2.3%;
 }
 
 .tweet .the-Tweet{
+  color: #39565e;
   font-size: 12;
+  margin-bottom: 8%;
   margin-left: 4%;
   margin-right: 4%;
   margin-top: 8%;
-  margin-bottom: 8%;
-  color: #39565e;
 }
 
 
 .tweet .footer {
-  display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding-left: 16px;
-  font-size: small;
   border-top: 1px solid #f1f1f1;
-  /*margin-top: 3%;*/
+  display: flex;
+  font-size: small;
+  justify-content: space-between;
+  padding-left: 16px;
 }
 
 .tweet .footer-icon {
-  visibility: hidden;
   height: 16px;
-  width: 16px;
   margin: 3px;
+  visibility: hidden;
+  width: 16px;
 }
 
 .tweet .tweet-actions{
-  display: flex;
   align-items: center;
+  display: flex;
 }
 
 .tweet:hover .footer-icon {
@@ -104,4 +98,3 @@
 .tweet:hover .likes {
   visibility: visible;
 }
-

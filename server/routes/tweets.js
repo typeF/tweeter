@@ -5,12 +5,22 @@ const cookieSession = require('cookie-session');
 const bcrypt = require('bcrypt');
 const bodyParser = require('body-parser');
 const express       = require('express');
-const app = express();
 const tweetsRoutes  = express.Router();
+const moment = require('moment');
 
+module.exports = function(DatabaseCRUD) {
 
+  // Get tweets route
+  tweetsRoutes.get("/", function(req, res) {
 
-module.exports = function(DataHelpers) {
+    DatabaseCRUD.getTweets((err, tweets) => {
+      if (err) {
+        res.status(500).json({ error: err.message });
+      } else {
+        res.json(tweets);
+      }
+    });
+  });
 
   tweetsRoutes.post("/register", function (req, res){
     const username = req.body.username;
@@ -19,51 +29,26 @@ module.exports = function(DataHelpers) {
     const password = req.body.password;
     const passwordHashed = bcrypt.hashSync(password, 10);
 
-    const userID = DataHelpers.generateRandomID();
-    req.session.userID = userID;
-
+    const userID = DatabaseCRUD.generateRandomID();
     const user = {
       userID: userID,
       username: username,
       name: name,
       email: email,
       password: passwordHashed,
-      site: []
     }
 
-    DataHelpers.saveUser(user);
-    res.redirect('/');
-  });
-
-
-  // Updates likes
-  tweetsRoutes.post("/like", function (req, res){
-    const likeID = req.body.likeID;
-    DataHelpers.checkPreviousLike(req.session.userID, likeID, function (err, result){
-      console.log("checkprevious like result is: ");
-      console.log(result);
-    });
-
-    DataHelpers.updateLike(likeID, function(err){
-      if (err) {
-        res.status(500).json({ error: err.message });
+    DatabaseCRUD.saveUser(user, function (result){
+      if (result){
+        req.session.userID = userID;
+        res.redirect('/');
+        return
       } else {
-        res.send();
-      }
-    }); //, function (err){
-
-  });
-
-  tweetsRoutes.post("/loginStatus", function (req, res){
-    DataHelpers.loginStatus(req.session.userID, function(err, result){
-      if (err) {
-        res.status(500).json({ error: err.message });
-      } else {
-        console.log("result is: " + result);
-        return (result);
+        res.status(403).send('Username or e-mail already taken');
+        return
       }
     });
-});
+  });
 
   // Login route
   tweetsRoutes.post("/login", function (req, res){
@@ -73,36 +58,20 @@ module.exports = function(DataHelpers) {
       username: username,
       password: password
     }
-    DataHelpers.checkLogin(loginInfo, function(err,users) {
-        if (err) {
-         res.status(500).json({ error: err.message });
-        } else {
-          for (let user in users){
-            if (users[user].username === username ){
-             if (users[user].username === username && bcrypt.compareSync(password,users[user].password)) {
-              req.session.userID = users[user].userID;
-              res.redirect('/');
-              return
-             }
-            }
-          }
-        res.status(403).send('Invalid e-mail or password');
-        return;
+    DatabaseCRUD.retrieveUser(loginInfo, function (err,userInfo) {
+      if (userInfo === null){
+        res.status(403).send('User not found');
+        return
       }
-    });
-  });
-
-  // Get tweets route
-  tweetsRoutes.get("/", function(req, res) {
-
-    DataHelpers.getTweets((err, tweets) => {
-      if (err) {
-        res.status(500).json({ error: err.message });
+      if (bcrypt.compareSync(password, userInfo.password)) {
+        req.session.userID = userInfo.userID;
+        res.redirect('/');
+        return
       } else {
-        res.json(tweets);
+        res.status(403).send('Invalid password');
+        return
       }
     });
-
   });
 
   // Save tweet route
@@ -112,87 +81,88 @@ module.exports = function(DataHelpers) {
       return;
     }
 
-    const userInfo = {
-      userName: "anon ymous",
-      userHandle: "@anon"
+    if (!req.session.userID) {
+      res.direct('/');
+      return;
     }
-    const user = req.body.user ? req.body.user : userHelper.generateRandomUser(userInfo);
-    const tweet = {
-      user: user,
-      likeCount: 0,
-      likedBy: "",
-      content: {
-        text: req.body.text
-      },
-      created_at: Date.now(),
-      site: []
-    };
 
-    DataHelpers.saveTweet(tweet, (err) => {
-      if (err) {
-        res.status(500).json({ error: err.message });
-      } else {
-        res.status(201).send();
-      }
+    const userID = req.session.userID;
 
+    DatabaseCRUD.retrieveUser(userID, function (err,userInfo) {
+      const user = userHelper.generateAvatar(userInfo);
+      const tweet = {
+        user: user,
+        userID: req.session.userID,
+        likeCount: 0,
+        likedBy: "",
+        content: {
+          text: req.body.text
+        },
+        created_at: Date.now()
+      };
+
+      DatabaseCRUD.saveTweet(tweet, (err) => {
+        if (err) {
+          res.status(500).json({ error: err.message });
+        } else {
+          res.status(201).send();
+        }
+      });
     });
   });
 
+  // Updates likes
+  tweetsRoutes.post("/like", function (req, res){
+    const tweetUserID = req.body.tweetUserID;
+    const likeID = req.body.likeID;
+    const userID = req.session.userID;
+    if (tweetUserID === userID){
+      res.send();
+    } else {
+      DatabaseCRUD.checkPreviousLike(userID, likeID, function (err, result){
+        DatabaseCRUD.updateLike(userID, result, likeID, function(err){
+              if (err) {
+                res.status(500).json({ error: err.message });
+              } else {
+                res.send();
+              }
+            });
+      });
+    }
+  });
+
+  tweetsRoutes.post("/loginStatus", function (req, res){
+    DatabaseCRUD.loginStatus(req.session.userID, function(err, result){
+      if (err) {
+        res.status(500).json({ error: err.message });
+      } else {
+        return result
+      }
+    });
+  });
+
+
+  // Check if logged in
+  tweetsRoutes.get('/isLoggedIn', (req,res, next) => {
+    DatabaseCRUD.loginStatus(req.session.userID, (err, result) => {
+      if(err){
+        next(err);
+      } else {
+        res.json(result);
+      }
+    })
+  });
+
   tweetsRoutes.post("/logout", function(req, res) {
-    console.log("Logged out");
     req.session = null;
-      DataHelpers.getTweets((err, tweets) => {
+      DatabaseCRUD.getTweets((err, tweets) => {
           if (err) {
             res.status(500).json({ error: err.message });
          } else {
             res.json(tweets);
          }
-        });
       });
+  });
 
   return tweetsRoutes;
-
 }
-
-
-
-//   tweetsRoutes.post("/register", function (req, res){
-//     const username = req.body.username;
-//     const name = req.body.name;
-//     const email = req.body.email;
-//     const password = req.body.password;
-//     const passwordHashed = bcrypt.hashSync(password, 10);
-
-//     DataHelpers.checkLogin(user, function (users){
-//       for (let userID in users){
-//         if (users[userID].user.email === email){
-//         res.status(400).send('Email already exists. Please enter new email');
-//         return
-//         }
-//         if (users[userID].user.username === username){
-//         res.status(400).send('Username already exists. Please enter new username');
-//         return
-//         }
-//       }
-//         if (email === "" || password === "" || username === "" || name === ""){
-//           res.status(400).send('Username, name, e-mail and password fields cannot be empty');
-//           return
-//         } else {
-//             const userID = DataHelpers.generateRandomID();
-//             req.session.userID = userID;
-
-//             const user = {
-//                 user: {
-//                   userID: userID,
-//                   username: username,
-//                   name: name,
-//                   email: email,
-//                   password: passwordHashed
-//                 }
-//             }
-
-//             DataHelpers.saveUser(user);
-
-//         }
-//       });
-// });

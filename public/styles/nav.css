@@ -14,11 +14,11 @@
 }
 
 #nav-bar .header {
+  color: #e8fdff;
   float: left;
   font-size: 2em;
   line-height: 2.4;
   padding-left: 10px;
-  color: #e8fdff;
 }
 
 #nav-bar .logo {
@@ -30,17 +30,17 @@
 #nav-bar .compose {
   background: #e8fdff;
   border-radius: 7px;
-  margin: 10px;
-  float: right;
   border: black solid 1px;
+  float: right;
+  margin: 10px;
 }
 
 #nav-bar .compose-icon {
-  height: 20px;
-  width: 20px;
   color: #1ba28d;
+  height: 20px;
   position: relative;
   top: 3px;
+  width: 20px;
 }
 
 
@@ -50,11 +50,10 @@
 
 
 #nav-bar .compose p {
-  float: left;
   color: #1ba28d;
-  margin: 15px;
+  float: left;
   font-size: x-large;
-
+  margin: 15px;
 }
 
 #nav-bar .compose:hover p {
@@ -65,17 +64,17 @@
 #nav-bar .register {
   background: #e8fdff;
   border-radius: 7px;
-  margin: 10px;
-  float: right;
   border: black solid 1px;
+  float: right;
+  margin: 10px;
 }
 
 #nav-bar .register-icon {
-  height: 20px;
-  width: 20px;
   color: #1ba28d;
+  height: 20px;
   position: relative;
   top: 3px;
+  width: 20px;
 }
 
 
@@ -85,11 +84,10 @@
 
 
 #nav-bar .register p {
-  float: left;
   color: #1ba28d;
-  margin: 15px;
+  float: left;
   font-size: x-large;
-
+  margin: 15px;
 }
 
 #nav-bar .register:hover p {
@@ -99,9 +97,9 @@
 #nav-bar .login {
   background: #e8fdff;
   border-radius: 7px;
-  margin: 10px;
-  float: right;
   border: black solid 1px;
+  float: right;
+  margin: 10px;
 }
 
 #nav-bar .login:hover {
@@ -110,11 +108,10 @@
 
 
 #nav-bar .login p {
-  float: left;
   color: #1ba28d;
-  margin: 15px;
+  float: left;
   font-size: x-large;
-
+  margin: 15px;
 }
 
 #nav-bar .login:hover p {
@@ -124,9 +121,9 @@
 #nav-bar .logout {
   background: #e8fdff;
   border-radius: 7px;
-  margin: 10px;
-  float: right;
   border: black solid 1px;
+  float: right;
+  margin: 10px;
 }
 
 #nav-bar .logout:hover {
@@ -135,11 +132,10 @@
 
 
 #nav-bar .logout p {
-  float: left;
   color: #1ba28d;
-  margin: 15px;
+  float: left;
   font-size: x-large;
-
+  margin: 15px;
 }
 
 #nav-bar .logout:hover p {

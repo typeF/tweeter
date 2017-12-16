@@ -1,12 +1,7 @@
 "use strict";
-
-// Simulates the kind of delay we see with network or filesystem operations
-
 const { ObjectId } = require('mongodb');
 
-// Defines helper functions for saving and getting tweets, using the database `db`
-module.exports = function makeDataHelpers(db) {
-
+module.exports = function DatabaseCRUD(db) {
   return {
 
     // Saves a tweet to `db`
@@ -25,65 +20,70 @@ module.exports = function makeDataHelpers(db) {
       });
     },
 
-
     // Saves a user
     saveUser: function(user, callback){
-      db.collection("users").insertOne(user);
+      db.collection("users").findOne({$or: [{"username": user.username},{"email":user.email}]}, (err, result) => {
+        if (result === null){
+          db.collection("users").insertOne(user);
+          callback (true);
+        } else {
+          callback (false);
+        }
+      });
     },
 
     // Updates a like
-    updateLike: function(documentID, callback){//, callback){
-      console.log(documentID);
-      db.collection("tweets").updateOne({ _id : ObjectId(documentID)}, {$inc: {likeCount:1}},
-        db.collection("tweets").find().toArray((err, tweets) => {
-          callback(null, tweets);
-        }));
+    updateLike: function(userID, likedBefore, documentID, callback){
+      if (likedBefore){
+        db.collection("tweets").updateOne({ _id : ObjectId(documentID)}, {$inc: {"likeCount":-1}});
+        db.collection("tweets").updateOne({_id : ObjectId(documentID)}, {$pull: {"likedUsers":userID}},
+          db.collection("tweets").find().toArray((err, tweets) => {
+            callback(null, tweets);
+          }));
+      } else {
+        db.collection("tweets").updateOne({ _id : ObjectId(documentID)}, {$inc: {likeCount:1}});
+          db.collection("tweets").update({_id : ObjectId(documentID)}, {$push: {"likedUsers":userID}},
+            db.collection("tweets").find().toArray((err, tweets) => {
+            callback(null, tweets);
+          }));
+      }
 
     },
 
-    loginStatus: function(query,callback){
-      console.log(query);
-      if (query === undefined){
+    loginStatus: function(userID,callback){
+      if (userID === undefined){
         return callback (null, false);
       }
-      db.collection("users").findOne({"userID":query}, function(err, result){
-        console.log(result);
-        if (query === result.userID){
-          callback(null, true);
-        } else {
+      db.collection("users").findOne({"userID":userID},(err, result) => {
+        if (result === null){
           callback(null, false);
+        } else {
+          callback(null, true);
         }
       });
     },
 
     checkPreviousLike: function(user, likeID, callback){
-      db.collection("users").findOne({$and: [{"userID": user},{"site":likeID}]}, function (err, result){
-        if (user === result.userID){
-          callback(null, true);
-        } else {
+      db.collection("tweets").findOne({$and: [{ _id : ObjectId(likeID)},{"likedUsers":user}]}, (err, result) => {
+        if (result === null){
           callback(null, false);
+        } else {
+          callback(null, true);
         }
+      });
+    },
+
+    retrieveUser: function (userID, callback){
+      db.collection("users").findOne({$or: [{"userID":userID}, {"username":userID.username}]}, (err, result) => {
+        callback(err, result);
       });
     },
 
     generateRandomID: function(){
       return Math.random().toString(16).slice(9);
-    },
-
-    checkLogin: function(loginInfo, callback) {
-      db.collection("users").find().toArray((err, users) => {
-        if (err) {
-          return callback(err);
-        }
-        callback(null, users);
-      });
-    },
-
-    incrementLikes: function (){
-
     }
 
-  };
+  }
 }
 
 

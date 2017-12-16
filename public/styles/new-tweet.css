@@ -1,25 +1,23 @@
 .new-tweet{
-  margin: 0 auto;
   background: #eeeeee;
-  margin-left: 2em;
-  margin-right: 2em;
   border-radius: 5px;
   border: #d3d3d3 solid 1px;
+  margin-left: 2em;
+  margin-right: 2em;
 }
 
 .new-tweet h2 {
-  text-align: left;
-  padding-left: 5%;
   color: #234751;
+  padding-left: 5%;
+  text-align: left;
 }
 
 
 .new-tweet h2:after {
-  /*margin-left: 5%;*/
-  margin-right: 5%;
+  border:1px solid black;
   content:' ';
   display:block;
-  border:1px solid black;
+  margin-right: 5%;
 }
 
 .new-tweet form {
@@ -33,23 +31,23 @@
 }
 
 .new-tweet textarea {
-  text-align: left;
   left: 0;
-  right: 0;
-  width: 95%;
   padding: 5px;
+  right: 0;
+  text-align: left;
+  width: 95%;
 }
 
 .new-tweet input {
   float: left;
-  margin-left: 2.5%;
   margin-bottom: 3%;
+  margin-left: 2.5%;
 }
 
 .new-tweet .counter {
-  float: right;
-  margin-right: 5%;
-  margin-bottom: 3%;
   color: #34545e;
+  float: right;
   font-style: italic;
+  margin-bottom: 3%;
+  margin-right: 5%;
 }
