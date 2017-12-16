@@ -36,6 +36,7 @@ $(document).ready(function (){
         $('.new-tweet').hide();
         $('.compose').hide();
         $('.heart').hide();
+        $('.retweet').hide();
         $('.login').show();
         $('.register').show();
     });
@@ -47,9 +48,8 @@ $(document).ready(function (){
   $('.logout').hide();
   $('.new-tweet').hide();
   $('.compose').hide();
-  getTweets();
-  $('.heart').hide();
 
+  getTweets();
   checkIsLoggedIn();
 });
 
@@ -86,7 +86,7 @@ function createTweetElement (data) {
     var $footer = $("<footer>").addClass("footer");
       var $date = $("<p>").addClass("date_created").text(data.created_at);
       var $imgf = $("<img src='https://png.icons8.com/destination/androidL/30/000000'>").addClass("footer-icon");
-      var $imgrt = $("<img src='https://png.icons8.com/retweet/win10/30/000000'>").addClass("footer-icon");
+      var $imgrt = $("<img src='https://png.icons8.com/retweet/win10/30/000000'>").addClass("footer-icon retweet");
       var $imghrt = $("<img src='https://png.icons8.com/heart/win10/30/000000'>").addClass("footer-icon heart").data("likes",data._id).data("tweetUserID",data.userID);
       var $likes = $("<span>").addClass("likes").text(data.likeCount);
 
@@ -127,6 +127,7 @@ function checkIsLoggedIn(){
       $('.compose').show();
       $('.logout').show();
       $('.heart').show();
+      $('.retweet').show();
       $('.login').hide();
       $('.register').hide();
     }

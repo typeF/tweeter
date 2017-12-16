@@ -50,7 +50,7 @@ module.exports = function(DatabaseCRUD) {
     });
   });
 
-  // Login route
+  // Logs user in
   tweetsRoutes.post("/login", function (req, res){
     const username = req.body.username;
     const password = req.body.password;
@@ -113,6 +113,9 @@ module.exports = function(DatabaseCRUD) {
 
   // Updates likes
   tweetsRoutes.post("/like", function (req, res){
+    if (!req.session.userID){
+      return;
+    }
     const tweetUserID = req.body.tweetUserID;
     const likeID = req.body.likeID;
     const userID = req.session.userID;
