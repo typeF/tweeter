@@ -27,7 +27,8 @@ module.exports = function(DataHelpers) {
       username: username,
       name: name,
       email: email,
-      password: passwordHashed
+      password: passwordHashed,
+      site: []
     }
 
     DataHelpers.saveUser(user);
@@ -38,6 +39,11 @@ module.exports = function(DataHelpers) {
   // Updates likes
   tweetsRoutes.post("/like", function (req, res){
     const likeID = req.body.likeID;
+    DataHelpers.checkPreviousLike(req.session.userID, likeID, function (err, result){
+      console.log("checkprevious like result is: ");
+      console.log(result);
+    });
+
     DataHelpers.updateLike(likeID, function(err){
       if (err) {
         res.status(500).json({ error: err.message });
@@ -114,10 +120,12 @@ module.exports = function(DataHelpers) {
     const tweet = {
       user: user,
       likeCount: 0,
+      likedBy: "",
       content: {
         text: req.body.text
       },
-      created_at: Date.now()
+      created_at: Date.now(),
+      site: []
     };
 
     DataHelpers.saveTweet(tweet, (err) => {

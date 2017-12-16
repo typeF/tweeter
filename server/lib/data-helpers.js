@@ -56,6 +56,15 @@ module.exports = function makeDataHelpers(db) {
       });
     },
 
+    checkPreviousLike: function(user, likeID, callback){
+      db.collection("users").findOne({$and: [{"userID": user},{"site":likeID}]}, function (err, result){
+        if (user === result.userID){
+          callback(null, true);
+        } else {
+          callback(null, false);
+        }
+      });
+    },
 
     generateRandomID: function(){
       return Math.random().toString(16).slice(9);
@@ -76,4 +85,5 @@ module.exports = function makeDataHelpers(db) {
 
   };
 }
+
 
