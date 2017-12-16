@@ -34,6 +34,7 @@ MongoClient.connect(MONGODB_URI, (err, db) => {
   const tweetsRoutes = require("./routes/tweets.js")(DataHelpers);
 
   app.use("/tweets", tweetsRoutes);
+
   app.get('/isLoggedIn', (req,res, next) => {
     DataHelpers.loginStatus(req.session.userID, (err, result) => {
       if(err){
@@ -43,6 +44,7 @@ MongoClient.connect(MONGODB_URI, (err, db) => {
       }
     })
   });
+
   app.listen(PORT, () => {
     console.log("Example app listening on port " + PORT);
   });

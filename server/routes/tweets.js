@@ -72,9 +72,9 @@ module.exports = function(DataHelpers) {
          res.status(500).json({ error: err.message });
         } else {
           for (let user in users){
-            if (users[user].user.username === username ){
-             if (users[user].user.username === username && bcrypt.compareSync(password,users[user].user.password)) {
-              req.session.userID = users[user].user.userID;
+            if (users[user].username === username ){
+             if (users[user].username === username && bcrypt.compareSync(password,users[user].password)) {
+              req.session.userID = users[user].userID;
               res.redirect('/');
               return
              }
@@ -106,7 +106,11 @@ module.exports = function(DataHelpers) {
       return;
     }
 
-    const user = req.body.user ? req.body.user : userHelper.generateRandomUser();
+    const userInfo = {
+      userName: "anon ymous",
+      userHandle: "@anon"
+    }
+    const user = req.body.user ? req.body.user : userHelper.generateRandomUser(userInfo);
     const tweet = {
       user: user,
       likeCount: 0,
@@ -122,6 +126,7 @@ module.exports = function(DataHelpers) {
       } else {
         res.status(201).send();
       }
+
     });
   });
 

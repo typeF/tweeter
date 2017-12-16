@@ -46,9 +46,9 @@ module.exports = function makeDataHelpers(db) {
       if (query === undefined){
         return callback (null, false);
       }
-      db.collection("users").findOne({"user.userID":query}, function(err, result){
+      db.collection("users").findOne({"userID":query}, function(err, result){
         console.log(result);
-        if (query === result.user.userID){
+        if (query === result.userID){
           callback(null, true);
         } else {
           callback(null, false);
