@@ -8,6 +8,8 @@ const path = require('path');
 const cookieSession = require('cookie-session');
 const sassMiddleware = require('node-sass-middleware');
 const bcrypt = require('bcrypt');
+require('dotenv').config();
+
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
@@ -23,7 +25,7 @@ app.use(sassMiddleware({
 }));
 
 const {MongoClient} = require("mongodb");
-const MONGODB_URI = "mongodb://localhost:27017/tweeter";
+const MONGODB_URI = process.env.MONGODB_URI;
 
 MongoClient.connect(MONGODB_URI, (err, db) => {
 
