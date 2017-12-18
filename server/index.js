@@ -1,3 +1,4 @@
+require('dotenv').config();
 "use strict";
 
 const PORT          = 8080;
@@ -8,7 +9,6 @@ const path = require('path');
 const cookieSession = require('cookie-session');
 const sassMiddleware = require('node-sass-middleware');
 const bcrypt = require('bcrypt');
-require('dotenv').config();
 
 
 app.use(bodyParser.urlencoded({ extended: true }));
