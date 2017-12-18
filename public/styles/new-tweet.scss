@@ -1,44 +1,53 @@
-.new-tweet {
+.new-tweet{
   background: #eeeeee;
   border-radius: 5px;
   border: #d3d3d3 solid 1px;
   margin-left: 2em;
-  margin-right: 2em; }
+  margin-right: 2em;
+}
 
 .new-tweet h2 {
   color: #234751;
   padding-left: 5%;
-  text-align: left; }
+  text-align: left;
+}
+
 
 .new-tweet h2:after {
-  border: 1px solid black;
-  content: ' ';
-  display: block;
-  margin-right: 5%; }
+  border:1px solid black;
+  content:' ';
+  display:block;
+  margin-right: 5%;
+}
 
 .new-tweet form {
   margin: 2px;
   padding-left: 2px;
-  padding-right: 2px; }
+  padding-right: 2px;
+}
 
-.new-tweet .textarea-container {
-  margin-left: 10px; }
+.new-tweet .textarea-container{
+  margin-left: 10px;
+}
 
 .new-tweet textarea {
   left: 0;
   padding: 5px;
   right: 0;
   text-align: left;
-  width: 95%; }
+  width: 95%;
+}
 
 .new-tweet input {
   float: left;
   margin-bottom: 3%;
-  margin-left: 2.5%; }
+  margin-left: 2.5%;
+}
 
 .new-tweet .counter {
   color: #34545e;
   float: right;
   font-style: italic;
   margin-bottom: 3%;
-  margin-right: 5%; }
+  margin-right: 5%;
+}
