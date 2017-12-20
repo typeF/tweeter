@@ -98,3 +98,11 @@
 .tweet:hover .likes {
   visibility: visible;
 }
+
+@media (max-width: 450px) {
+  .tweet {
+    flex-shrink: 0;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+}

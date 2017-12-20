@@ -1,10 +1,29 @@
 $tweeter-green: #e8fdff;
 
+@mixin nav-icons {
+  background: $tweeter-green;
+  border-radius: 7px;
+  border: black solid 1px;
+  margin: 10px;
+}
+
+@mixin nav-text {
+  color: #1ba28d;
+  font-size: x-large;
+  margin: 15px;
+}
+
+@mixin smaller-text {
+  font-size: smaller !important;
+}
+
 #nav-bar {
   background-color: #00a087;
   color: #244751;
+  display: flex;
   font-family: 'Roboto Condensed', sans-serif;
   height: 80px;
+  justify-content: space-between;
   left: 0;
   padding-left: 2em;
   padding-right: 2em;
@@ -12,6 +31,56 @@ $tweeter-green: #e8fdff;
   right: 0;
   top: 0;
   z-index: 5;
+}
+
+@media (max-width: 450px) {
+  #nav-bar .nav-buttons{
+    align-items: center;
+    display: flex;
+    margin-right: -31px;
+  }
+
+  .logo {
+    margin-left: -24px;
+  }
+
+  .header {
+    padding-left: 0px !important;
+  }
+
+  #compose-text {
+    font-size: 0 !important;
+  }
+
+  .login {
+    margin: 0px !important;
+  }
+
+  .logout {
+    margin: 0px !important;
+    padding: 3px;
+  }
+
+  .login p {
+    @include smaller-text
+  }
+
+  .register p {
+    @include smaller-text
+  }
+
+  .logout p {
+    @include smaller-text
+  }
+}
+
+#nav-bar .nav-buttons{
+  margin-right: -31px;
+  display: flex;
+}
+
+#nav-bar .nav-left {
+  display: flex;
 }
 
 #nav-bar .header {
@@ -29,15 +98,10 @@ $tweeter-green: #e8fdff;
 }
 
 #nav-bar .compose {
-  background: $tweeter-green;
-  border-radius: 7px;
-  border: black solid 1px;
-  float: right;
-  margin: 10px;
+  @include nav-icons;
 }
 
 #nav-bar .compose-icon {
-  color: #1ba28d;
   height: 20px;
   position: relative;
   top: 3px;
@@ -51,10 +115,7 @@ $tweeter-green: #e8fdff;
 
 
 #nav-bar .compose p {
-  color: #1ba28d;
-  float: left;
-  font-size: x-large;
-  margin: 15px;
+  @include nav-text;
 }
 
 #nav-bar .compose:hover p {
@@ -63,32 +124,22 @@ $tweeter-green: #e8fdff;
 
 
 #nav-bar .register {
-  background: $tweeter-green;
-  border-radius: 7px;
-  border: black solid 1px;
-  float: right;
-  margin: 10px;
+  @include nav-icons;
 }
 
 #nav-bar .register-icon {
-  color: #1ba28d;
   height: 20px;
   position: relative;
   top: 3px;
   width: 20px;
 }
 
-
 #nav-bar .register:hover {
   background: white;
 }
 
-
 #nav-bar .register p {
-  color: #1ba28d;
-  float: left;
-  font-size: x-large;
-  margin: 15px;
+  @include nav-text;
 }
 
 #nav-bar .register:hover p {
@@ -96,11 +147,7 @@ $tweeter-green: #e8fdff;
 }
 
 #nav-bar .login {
-  background: #e8fdff;
-  border-radius: 7px;
-  border: black solid 1px;
-  float: right;
-  margin: 10px;
+  @include nav-icons;
 }
 
 #nav-bar .login:hover {
@@ -109,10 +156,7 @@ $tweeter-green: #e8fdff;
 
 
 #nav-bar .login p {
-  color: #1ba28d;
-  float: left;
-  font-size: x-large;
-  margin: 15px;
+  @include nav-text;
 }
 
 #nav-bar .login:hover p {
@@ -120,25 +164,20 @@ $tweeter-green: #e8fdff;
 }
 
 #nav-bar .logout {
-  background: #e8fdff;
-  border-radius: 7px;
-  border: black solid 1px;
-  float: right;
-  margin: 10px;
-}
+  @include nav-icons;}
 
 #nav-bar .logout:hover {
   background: white;
 }
 
-
 #nav-bar .logout p {
-  color: #1ba28d;
-  float: left;
-  font-size: x-large;
-  margin: 15px;
+  @include nav-text;
 }
 
 #nav-bar .logout:hover p {
   color: black;
+}
+
+#nav-bar .nav-buttons {
+  justify-content: right;
 }

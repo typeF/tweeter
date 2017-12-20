@@ -9,6 +9,11 @@ const cookieSession = require('cookie-session');
 const sassMiddleware = require('node-sass-middleware');
 const bcrypt = require('bcrypt');
 
+app.use(sassMiddleware({
+  src: __dirname + "/../public",
+  dest: path.join(__dirname, '/..', 'public'),
+  debug: true,
+}));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
@@ -17,11 +22,7 @@ app.use(cookieSession({
   keys: ['super top secret key']
 }));
 
-app.use(sassMiddleware({
-  src: __dirname + "/../public",
-  dest: path.join(__dirname, '/..', 'public'),
-  debug: true,
-}));
+
 
 const {MongoClient} = require("mongodb");
 const MONGODB_URI = process.env.MONGODB_URI;
