@@ -16,6 +16,9 @@ $(document).ready(function (){
 
   $(".compose").on('click', composeSlider);
 
+  $("p").on()
+
+
   // Like a tweet
   $("#tweets").on('click', ".heart", function(event){
     const tweetUserID = $(this).data("tweetUserID");
@@ -51,6 +54,7 @@ $(document).ready(function (){
 
   getTweets();
   checkIsLoggedIn();
+  parseDate();
 });
 
 function getTweets () {
@@ -84,7 +88,7 @@ function createTweetElement (data) {
     var $tweet = $("<p>").text(data.content.text).addClass("the-Tweet");
 
     var $footer = $("<footer>").addClass("footer");
-      var $date = $("<p>").addClass("date_created").text(data.created_at);
+      var $date = $("<p>").addClass("date_created").text(parseDate(data.created_at));
       var $imgf = $("<img src='https://png.icons8.com/destination/androidL/30/000000'>").addClass("footer-icon");
       var $imgrt = $("<img src='https://png.icons8.com/retweet/win10/30/000000'>").addClass("footer-icon retweet");
       var $imghrt = $("<img src='https://png.icons8.com/heart/win10/30/000000'>").addClass("footer-icon heart").data("likes",data._id).data("tweetUserID",data.userID);
@@ -138,6 +142,12 @@ function composeSlider(){
   $(".new-tweet").slideToggle();
   $('textarea').focus();
  }
+
+function parseDate(date) {
+  formattedDate = moment(date).startOf('day').fromNow();
+  return formattedDate
+}
+
 
 function errorHandling (){
   const textarea = $("textarea").val();

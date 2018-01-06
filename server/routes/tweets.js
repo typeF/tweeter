@@ -12,7 +12,6 @@ module.exports = function(DatabaseCRUD) {
 
   // Get tweets route
   tweetsRoutes.get("/", function(req, res) {
-
     DatabaseCRUD.getTweets((err, tweets) => {
       if (err) {
         res.status(500).json({ error: err.message });
